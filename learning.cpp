@@ -1,9 +1,10 @@
+//This code below takes the value from the json file and finds the roots using the Lagrange Interpolation equation
+//This code reads `n` data points from a JSON file. Each point has an `x` key and a `y` value stored in some base. It first decodes each `y` into decimal using the `decode` function. Then, it uses the first `k` points to perform **Lagrange interpolation** at `x = 0` to find the constant term `c` of the hidden polynomial. Essentially, it converts all numbers into decimal, builds the interpolation polynomial from the given `(x, y)` pairs, and outputs the secret constant `c`.
 #include <bits/stdc++.h>
-#include "json.hpp" // nlohmann json library
+#include "json.hpp" 
 using namespace std;
 using json = nlohmann::json;
 
-// Convert string in given base to decimal
 long long decode(const string& value, int base) {
     long long result = 0;
     for (char c : value) {
@@ -15,7 +16,7 @@ long long decode(const string& value, int base) {
     return result;
 }
 
-// Lagrange interpolation at x=0 to find constant c
+
 long long lagrangeInterpolation(const vector<long long>& X, const vector<long long>& Y, int k) {
     long double c = 0.0;
     for (int i = 0; i < k; i++) {
@@ -27,7 +28,7 @@ long long lagrangeInterpolation(const vector<long long>& X, const vector<long lo
         }
         c += term;
     }
-    return llround(c); // rounded constant term
+    return llround(c);
 }
 
 int main() {
